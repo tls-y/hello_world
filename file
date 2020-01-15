@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int a, liczba, suma = 0;
+    do {
+    printf("Wybierz:\n 1 - Wyswietl liczby \n 2 - Dodaj liczbe \n 3 - Wyswietl sume liczb \n 0 - Wyjscie \n");
+    scanf("%d", &a);
+    switch(a){
+
+
+    case 1:
+    {FILE *plik = fopen("plik.txt","r");
+    if (plik == NULL) {
+        printf("Pusty plik,dopisz liczbe\n");
+        }
+    while (fscanf(plik,"%d",&liczba)!= EOF) {
+      printf("%d\n",liczba);
+      }
+    fclose(plik);
+    }
+    break;
+
+    case 2:
+    {
+    printf("Podaj liczbe: ");
+    scanf("%d", &liczba);
+    FILE *plik = fopen("plik.txt","a");
+    fprintf(plik, "%d\n", liczba);
+    fclose(plik);
+    }
+    break;
+
+    case 3:
+    {
+    FILE *plik = fopen("plik.txt", "r");
+    if (plik == NULL) {
+      printf("Pusty plik, dopisz liczbe\n");
+    }else{
+      printf("Suma: ");
+      while(fscanf(plik,"%d",&liczba)!=EOF) {
+        suma+=liczba;
+        }
+    printf("%d\n",suma);
+    }
+    fclose(plik);
+    }
+    break;
+
+    default:
+    break;
+    }
+    } while(a !=0);
+    return 0;
+}
